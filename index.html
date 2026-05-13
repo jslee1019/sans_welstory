@@ -67,6 +67,7 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .verdict-title.opp { color: var(--ink); } .verdict-title.lim { color: var(--negative); } .verdict-title.sol { color: var(--positive); }
 .verdict p { font-size: 15px; }
 .circle-mark { display: inline-block; padding: 2px 8px; font-weight: 500; color: var(--negative); background: rgba(139, 44, 44, 0.08); border-radius: 3px; }
+.circle-mark.pos { color: var(--positive); background: rgba(45, 106, 79, 0.1); }
 .review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
 .review { padding: 16px 20px; border: 1px solid var(--rule); background: #fafaf6; }
 .review-rating { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 10px; }
@@ -118,68 +119,13 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .product-card.compact { padding: 14px 16px; display: flex; flex-direction: column; }
 .product-card.compact .product-name { font-size: 14px; margin-bottom: 6px; }
 .product-card.compact .product-desc { font-size: 12.5px; line-height: 1.55; }
-.ingredient-img { display: none; }
+.product-card.compact .ingredient-img { margin: -14px -16px 12px; height: 130px; }
+.ingredient-img { display: flex; justify-content: center; align-items: center; height: 160px; margin: -22px -22px 16px; background: #ffffff; border-radius: 12px 12px 0 0; overflow: hidden; }
+.ingredient-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .ingredient-img .placeholder { font-size: 12px; color: var(--ink-light); letter-spacing: 0.05em; text-transform: uppercase; }
 .category-block .product-grid { margin: 0; gap: 12px; }
-.category-block .product-card { background: #ffffff; border: none; border-radius: 12px; padding: 22px 22px 24px; }
-.category-block .product-card[style*="--card-bg-image"],
-.category-block .product-card.compact[style*="--card-bg-image"] {
-  background: #1a1a1a;
-  padding: 0;
-  overflow: hidden;
-  position: relative;
-  aspect-ratio: 3 / 2;
-  min-height: 240px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  isolation: isolate;
-}
-.category-block .product-card[style*="--card-bg-image"]::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--card-bg-image);
-  background-size: cover;
-  background-position: center;
-  z-index: -2;
-}
-.category-block .product-card[style*="--card-bg-image"]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.05) 100%);
-  z-index: -1;
-}
-.category-block .product-card[style*="--card-bg-image"] .card-content {
-  padding: 20px 22px 22px;
-  color: #ffffff;
-}
-.category-block .product-card[style*="--card-bg-image"] .product-tag {
-  display: inline-block;
-  padding: 4px 9px;
-  border: 1px solid rgba(255,255,255,0.7);
-  color: #ffffff !important;
-  font-size: 9.5px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-}
-.category-block .product-card[style*="--card-bg-image"] .product-name {
-  color: #ffffff;
-  font-size: 19px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  letter-spacing: -0.005em;
-}
-.category-block .product-card[style*="--card-bg-image"] .product-name span {
-  color: rgba(255,255,255,0.7) !important;
-  font-weight: 400;
-}
-.category-block .product-card[style*="--card-bg-image"] .product-desc {
-  color: rgba(255,255,255,0.85);
-  font-size: 13px;
-  line-height: 1.55;
-}
+.category-block .product-card { background: #ffffff; border: none; border-radius: 12px; padding: 22px 22px 24px; display: flex; flex-direction: column; }
+.category-block .product-card .ingredient-img { flex-shrink: 0; }
 .category-block.mushroom .product-tag.launched { color: var(--mushroom-accent); }
 .category-block.herb .product-tag.launched { color: var(--herb-accent); }
 .category-block.functional .product-tag.launched { color: var(--functional-accent); }
@@ -400,7 +346,7 @@ footer { padding: 56px 0; background: var(--ink); }
       </div>
       <div class="verdict">
         <p class="verdict-title sol">SANS의 해법</p>
-        <p>원두 제로 + 발효로 버섯 이취 완전 제거 + 커피 향미 분자 수준 재현. WBC 챔피언 2명이 공개 인증한 유일한 대체커피입니다. 신세계 스위트파크 입점 후 오픈 대비 +900% 성장하고 있습니다.</p>
+        <p><span class="circle-mark pos">원두 제로</span> + 발효로 <span class="circle-mark pos">버섯 이취 완전 제거</span> + <span class="circle-mark pos">커피 향미 분자 수준 재현</span>. WBC 챔피언 2명이 공개 인증한 유일한 대체커피입니다. 신세계 스위트파크 입점 후 오픈 대비 +900% 성장하고 있습니다.</p>
       </div>
     </div>
     <div class="callout">
@@ -616,47 +562,41 @@ footer { padding: 56px 0; background: var(--ink); }
       <p class="cat-title">검증된 약용 버섯</p>
       <p class="cat-intro">노루궁뎅이·차가·동충하초·영지·백목이 등 동서양에서 오랫동안 연구·활용되어 온 버섯들. 발효 공정으로 흙냄새가 제거되어 커피와 자연스럽게 결합됩니다.</p>
       <div class="product-grid">
-      <div class="product-card" style="--card-bg-image:url('assets/ingredients/lions-mane.jpg');">
-        <div class="card-content">
-            <p class="product-tag launched">버섯</p>
-            <p class="product-name">노루궁뎅이버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Lion's Mane</span></p>
-            <p class="product-desc">베타글루칸·헤리세논·에리나신 성분을 함유한 약용 버섯. 인지 기능과 신경계 건강에 도움을 줄 수 있는 원료로 알려져 있으며, 해외에서는 'Brain Mushroom'으로 불리며 웰니스 시장에서 빠르게 자리잡고 있습니다.</p>
-        </div>
+      <div class="product-card">
+        <p class="product-tag launched">버섯</p>
+        <div class="ingredient-img"><img src="assets/ingredients/lions-mane.jpg" alt="노루궁뎅이버섯" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>노루궁뎅이버섯</span>'"></div>
+        <p class="product-name">노루궁뎅이버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Lion's Mane</span></p>
+        <p class="product-desc">베타글루칸·헤리세논·에리나신 성분을 함유한 약용 버섯. 인지 기능과 신경계 건강에 도움을 줄 수 있는 원료로 알려져 있으며, 해외에서는 'Brain Mushroom'으로 불리며 웰니스 시장에서 빠르게 자리잡고 있습니다.</p>
       </div>
-      <div class="product-card" style="--card-bg-image:url('assets/ingredients/chaga.jpg');">
-        <div class="card-content">
-            <p class="product-tag launched">버섯</p>
-            <p class="product-name">차가버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Chaga</span></p>
-            <p class="product-desc">시베리아 자작나무에서 자라는 약용 버섯으로, 폴리페놀·SOD·베타글루칸 등 항산화 성분을 함유합니다. 면역과 세포 건강에 도움을 줄 수 있는 원료로 알려져 있으며, 흔히 '버섯의 왕'으로 불립니다.</p>
-        </div>
+      <div class="product-card">
+        <p class="product-tag launched">버섯</p>
+        <div class="ingredient-img"><img src="assets/ingredients/chaga.jpg" alt="차가버섯" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>차가버섯</span>'"></div>
+        <p class="product-name">차가버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Chaga</span></p>
+        <p class="product-desc">시베리아 자작나무에서 자라는 약용 버섯으로, 폴리페놀·SOD·베타글루칸 등 항산화 성분을 함유합니다. 면역과 세포 건강에 도움을 줄 수 있는 원료로 알려져 있으며, 흔히 '버섯의 왕'으로 불립니다.</p>
       </div>
-      <div class="product-card" style="--card-bg-image:url('assets/ingredients/cordyceps.jpg');">
-        <div class="card-content">
-            <p class="product-tag launched">버섯</p>
-            <p class="product-name">동충하초 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Cordyceps</span></p>
-            <p class="product-desc">코디세핀·아데노신을 함유한 전통 약용 버섯. 피로 회복과 지구력에 도움을 줄 수 있는 원료로 알려져 있으며, 동아시아에서 오랫동안 활용되어 온 원료입니다. 카페인 없이 활력을 더하고 싶은 포뮬러에 적합합니다.</p>
-        </div>
+      <div class="product-card">
+        <p class="product-tag launched">버섯</p>
+        <div class="ingredient-img"><img src="assets/ingredients/cordyceps.jpg" alt="동충하초" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>동충하초</span>'"></div>
+        <p class="product-name">동충하초 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Cordyceps</span></p>
+        <p class="product-desc">코디세핀·아데노신을 함유한 전통 약용 버섯. 피로 회복과 지구력에 도움을 줄 수 있는 원료로 알려져 있으며, 동아시아에서 오랫동안 활용되어 온 원료입니다. 카페인 없이 활력을 더하고 싶은 포뮬러에 적합합니다.</p>
       </div>
-      <div class="product-card" style="--card-bg-image:url('assets/ingredients/reishi.jpg');">
-        <div class="card-content">
-            <p class="product-tag launched">버섯</p>
-            <p class="product-name">영지버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Reishi</span></p>
-            <p class="product-desc">예로부터 '불로초'라 불려온 약용 버섯. 트리테르페노이드·베타글루칸을 함유하며, 스트레스 완화와 수면의 질, 면역 균형에 도움을 줄 수 있는 원료로 알려져 있습니다. 저녁 시간대 음용 포뮬러에 적합합니다.</p>
-        </div>
+      <div class="product-card">
+        <p class="product-tag launched">버섯</p>
+        <div class="ingredient-img"><img src="assets/ingredients/reishi.jpg" alt="영지버섯" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>영지버섯</span>'"></div>
+        <p class="product-name">영지버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Reishi</span></p>
+        <p class="product-desc">예로부터 '불로초'라 불려온 약용 버섯. 트리테르페노이드·베타글루칸을 함유하며, 스트레스 완화와 수면의 질, 면역 균형에 도움을 줄 수 있는 원료로 알려져 있습니다. 저녁 시간대 음용 포뮬러에 적합합니다.</p>
       </div>
-      <div class="product-card" style="--card-bg-image:url('assets/ingredients/tremella.jpg');">
-        <div class="card-content">
-            <p class="product-tag launched">버섯</p>
-            <p class="product-name">백목이버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Tremella · Snow Mushroom</span></p>
-            <p class="product-desc">'은이버섯'으로도 불리는 약용 버섯. 천연 다당체와 보습 성분이 풍부해 피부 수분과 탄력에 도움을 줄 수 있는 원료로 알려져 있으며, 해외에서는 'Beauty Mushroom'으로 뷰티·스킨 케어 라인에 활용됩니다.</p>
-        </div>
+      <div class="product-card">
+        <p class="product-tag launched">버섯</p>
+        <div class="ingredient-img"><img src="assets/ingredients/tremella.jpg" alt="백목이버섯" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>백목이버섯</span>'"></div>
+        <p class="product-name">백목이버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Tremella · Snow Mushroom</span></p>
+        <p class="product-desc">'은이버섯'으로도 불리는 약용 버섯. 천연 다당체와 보습 성분이 풍부해 피부 수분과 탄력에 도움을 줄 수 있는 원료로 알려져 있으며, 해외에서는 'Beauty Mushroom'으로 뷰티·스킨 케어 라인에 활용됩니다.</p>
       </div>
-      <div class="product-card" style="--card-bg-image:url('assets/ingredients/red-ginseng.jpg');">
-        <div class="card-content">
-            <p class="product-tag launched">한방</p>
-            <p class="product-name">홍삼 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Korean Red Ginseng</span></p>
-            <p class="product-desc">6년근 인삼을 증숙·건조한 한국 대표 원료. 진세노사이드 Rg1·Rb1·Rg3 등 고유 사포닌을 함유하며, 면역력 증진과 피로 회복, 기억력 개선, 항산화에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
-        </div>
+      <div class="product-card">
+        <p class="product-tag launched">한방</p>
+        <div class="ingredient-img"><img src="assets/ingredients/red-ginseng.jpg" alt="홍삼" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>홍삼</span>'"></div>
+        <p class="product-name">홍삼 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Korean Red Ginseng</span></p>
+        <p class="product-desc">6년근 인삼을 증숙·건조한 한국 대표 원료. 진세노사이드 Rg1·Rb1·Rg3 등 고유 사포닌을 함유하며, 면역력 증진과 피로 회복, 기억력 개선, 항산화에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
       </div>
       </div>
     </div>
@@ -665,62 +605,46 @@ footer { padding: 56px 0; background: var(--ink); }
       <p class="cat-label">Herbs · 허브 원료</p>
       <p class="cat-title">향과 기능을 함께 더하는 식물 원료</p>
       <p class="cat-intro">라벤더·자스민·메리골드 같은 꽃 허브부터 대추·타트체리·세븐베리·암라 같은 베리·열매 원료까지. 포뮬러에 풍미의 깊이와 시각적 정체성을 부여합니다.</p>
-      <div class="product-grid">
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/lavender.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">라벤더 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Lavender</span></p>
-            <p class="product-desc">스트레스 완화와 수면의 질에 도움을 줄 수 있는 원료로 알려진 대표 허브. 은은한 플로럴 향이 발효 베이스에 균형감을 더합니다.</p>
-        </div>
+      <div class="product-grid cols-3">
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/lavender.jpg" alt="라벤더" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>라벤더</span>'"></div>
+        <p class="product-name">라벤더 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Lavender</span></p>
+        <p class="product-desc">스트레스 완화와 수면의 질에 도움을 줄 수 있는 원료로 알려진 대표 허브. 은은한 플로럴 향이 발효 베이스에 균형감을 더합니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/lemon-balm.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">레몬밤 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Lemon Balm</span></p>
-            <p class="product-desc">민트과 허브로 시트러스 향이 특징. 긴장 완화와 편안한 수면에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/lemon-balm.jpg" alt="레몬밤" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>레몬밤</span>'"></div>
+        <p class="product-name">레몬밤 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Lemon Balm</span></p>
+        <p class="product-desc">민트과 허브로 시트러스 향이 특징. 긴장 완화와 편안한 수면에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/jujube.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">대추 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Jujube</span></p>
-            <p class="product-desc">한국 전통 보양 식재. 자연 단맛과 함께 기력 보조에 도움을 줄 수 있는 원료로 알려져 있어 한방 베이스 포뮬러와 잘 어울립니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/jujube.jpg" alt="대추" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>대추</span>'"></div>
+        <p class="product-name">대추 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Jujube</span></p>
+        <p class="product-desc">한국 전통 보양 식재. 자연 단맛과 함께 기력 보조에 도움을 줄 수 있는 원료로 알려져 있어 한방 베이스 포뮬러와 잘 어울립니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/tart-cherry.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">타트체리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Tart Cherry</span></p>
-            <p class="product-desc">멜라토닌이 자연 함유된 베리. 수면의 질과 회복에 도움을 줄 수 있는 원료로 알려져 있어 저녁용 포뮬러에 활용됩니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/tart-cherry.jpg" alt="타트체리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>타트체리</span>'"></div>
+        <p class="product-name">타트체리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Tart Cherry</span></p>
+        <p class="product-desc">멜라토닌이 자연 함유된 베리. 수면의 질과 회복에 도움을 줄 수 있는 원료로 알려져 있어 저녁용 포뮬러에 활용됩니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/jasmine.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">자스민 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Jasmine</span></p>
-            <p class="product-desc">동양의 대표 향 허브. 우아한 플로럴 노트가 발효 베이스에 깊이를 더하며, 이완과 기분 전환에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/jasmine.jpg" alt="자스민" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>자스민</span>'"></div>
+        <p class="product-name">자스민 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Jasmine</span></p>
+        <p class="product-desc">동양의 대표 향 허브. 우아한 플로럴 노트가 발효 베이스에 깊이를 더하며, 이완과 기분 전환에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/marigold.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">메리골드 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Marigold</span></p>
-            <p class="product-desc">루테인·제아잔틴을 함유한 꽃잎 추출물. 눈 건강과 항산화에 도움을 줄 수 있는 원료로 알려져 있으며, 라인업의 자연스러운 옐로 톤도 더해줍니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/marigold.jpg" alt="메리골드" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>메리골드</span>'"></div>
+        <p class="product-name">메리골드 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Marigold</span></p>
+        <p class="product-desc">루테인·제아잔틴을 함유한 꽃잎 추출물. 눈 건강과 항산화에 도움을 줄 수 있는 원료로 알려져 있으며, 라인업의 자연스러운 옐로 톤도 더해줍니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/seven-berries.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">세븐베리 농축분말 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Seven Berries</span></p>
-            <p class="product-desc">아로니아·블루베리·블랙커런트 등 7종 베리 농축물. 안토시아닌·폴리페놀이 풍부해 항산화와 눈 건강에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/seven-berries.jpg" alt="세븐베리 농축분말" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>세븐베리 농축분말</span>'"></div>
+        <p class="product-name">세븐베리 농축분말 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Seven Berries</span></p>
+        <p class="product-desc">아로니아·블루베리·블랙커런트 등 7종 베리 농축물. 안토시아닌·폴리페놀이 풍부해 항산화와 눈 건강에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
       </div>
-      <div class="product-card compact" style="--card-bg-image:url('assets/ingredients/amla.jpg');">
-        <div class="card-content">
-    <p class="product-tag launched">허브</p>
-            <p class="product-name">인디언 구스베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Amla</span></p>
-            <p class="product-desc">아유르베다 전통 슈퍼푸드 '암라'. 비타민C 함량이 매우 높고, 항산화와 면역에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
-        </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/amla.jpg" alt="인디언 구스베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>인디언 구스베리</span>'"></div>
+        <p class="product-name">인디언 구스베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Amla</span></p>
+        <p class="product-desc">아유르베다 전통 슈퍼푸드 '암라'. 비타민C 함량이 매우 높고, 항산화와 면역에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
       </div>
       </div>
     </div>
@@ -1089,7 +1013,7 @@ footer { padding: 56px 0; background: var(--ink); }
         </div>
         <div class="contact-card">
           <p class="contact-role">담당</p>
-          <p class="contact-name">김래린 대리</p>
+          <p class="contact-name">김태린 대리</p>
           <p class="contact-info">010.2707.2327</p>
           <p class="contact-info">tlkim&#64;wakecorp&#46;com</p>
         </div>
