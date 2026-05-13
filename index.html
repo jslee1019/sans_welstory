@@ -12,10 +12,10 @@
   --ink: #1a1a1a; --ink-mid: #4a4a4a; --ink-light: #8a8a8a;
   --rule: #e0e0e0; --bg: #ffffff; --highlight: #f5f3ec;
   --positive: #2d6a4f; --negative: #8b2c2c;
-  /* Category colors — Seed-inspired tones */
-  --mushroom-bg: #f0ebe0; --mushroom-accent: #8b6f3e;
-  --herb-bg: #e8edd9; --herb-accent: #5a7048;
-  --functional-bg: #e3e8e8; --functional-accent: #3d5a5c;
+  /* Category colors — distinct hues, unified low saturation */
+  --mushroom-bg: #e7dcc8; --mushroom-accent: #7a5f3a;
+  --herb-bg: #d8ebe2; --herb-accent: #2d6a4f;
+  --functional-bg: #d6dde0; --functional-accent: #46575e;
   --font-display: 'DM Serif Display', Georgia, serif;
   --font-body: 'DM Sans', 'Noto Sans KR', sans-serif;
   --max: 820px;
@@ -28,10 +28,10 @@ section:last-of-type { border-bottom: none; }
 .display { font-family: var(--font-display); font-size: clamp(36px, 7vw, 68px); line-height: 1.06; letter-spacing: -0.02em; }
 .display em { font-style: italic; color: var(--ink-mid); }
 h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; line-height: 1.25; margin-bottom: 28px; }
-.section-label { display: flex; align-items: center; gap: 14px; background: #ededea; color: var(--ink-mid); padding: 14px 22px; margin: 40px 0 24px; border-radius: 6px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
-.section-label::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--ink-mid); border-radius: 50%; flex-shrink: 0; opacity: 0.45; }
-.section-label .ko { font-weight: 500; letter-spacing: 0.02em; text-transform: none; font-size: 15px; color: var(--ink); }
-.section-label .en { font-size: 11px; letter-spacing: 0.14em; opacity: 0.6; margin-left: auto; flex-shrink: 0; }
+.section-label { display: flex; align-items: center; gap: 14px; background: #2a2a2a; color: rgba(255,255,255,0.65); padding: 14px 22px; margin: 40px 0 24px; border-radius: 6px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.section-label::before { content: ''; display: inline-block; width: 6px; height: 6px; background: #c0ffee; border-radius: 50%; flex-shrink: 0; }
+.section-label .ko { font-weight: 500; letter-spacing: 0.02em; text-transform: none; font-size: 15px; color: #ffffff; }
+.section-label .en { font-size: 11px; letter-spacing: 0.14em; opacity: 0.55; margin-left: auto; flex-shrink: 0; color: rgba(255,255,255,0.7); }
 h3 { font-size: 14px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-mid); margin-bottom: 20px; }
 p { color: var(--ink-mid); margin-bottom: 16px; line-height: 1.8; }
 p:last-child { margin-bottom: 0; }
@@ -117,11 +117,8 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .category-block .product-grid { margin: 0; }
 .category-block .product-card { background: #ffffff; border: none; border-radius: 14px; padding: 22px 22px 24px; }
 .category-block.mushroom .product-tag.launched { color: var(--mushroom-accent); }
-.category-block.mushroom .ingredient-img { background: #f9f4e8; }
 .category-block.herb .product-tag.launched { color: var(--herb-accent); }
-.category-block.herb .ingredient-img { background: #f1f5e6; }
 .category-block.functional .product-tag.launched { color: var(--functional-accent); }
-.category-block.functional .ingredient-img { background: #eef1f1; }
 .category-block.mushroom { background: var(--mushroom-bg); color: #2a1f10; }
 .category-block.mushroom .cat-label { color: var(--mushroom-accent); }
 .category-block.herb { background: var(--herb-bg); color: #1f2614; }
@@ -651,7 +648,7 @@ footer { padding: 56px 0; background: var(--ink); }
 
     <div class="category-block functional">
       <p class="cat-label">Functional · 기능성 원료</p>
-      <p class="cat-title">정밀하게 설계되는 효과</p>
+      <p class="cat-title">정밀하게 설계된 기능성 원료</p>
       <p class="cat-intro">미네랄·아미노산·식이섬유·플라보노이드 등 검증된 기능성 원료들. 트웰브 고객 페르소나에 맞춰 정밀하게 조합 가능합니다.</p>
       <div class="product-grid">
       <div class="product-card compact">
