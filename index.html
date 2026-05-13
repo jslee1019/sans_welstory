@@ -120,9 +120,12 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .product-card.compact .product-name { font-size: 14px; margin-bottom: 6px; }
 .product-card.compact .product-desc { font-size: 12.5px; line-height: 1.55; }
 .category-block .product-card.compact { padding: 0; }
+.category-block .product-card.compact .product-tag,
 .category-block .product-card.compact .product-name,
 .category-block .product-card.compact .product-desc { padding-left: 16px; padding-right: 16px; }
+.category-block .product-card.compact .product-tag { padding-top: 16px; }
 .category-block .product-card.compact .product-name { padding-top: 18px; }
+.category-block .product-card.compact .product-tag + .product-name { padding-top: 4px; }
 .category-block .product-card.compact .product-desc { padding-bottom: 16px; }
 .ingredient-img { display: block; width: 100%; aspect-ratio: 3 / 2; margin: 0 0 16px; background: #ffffff; border-radius: 8px; overflow: hidden; }
 .ingredient-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -130,9 +133,15 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .category-block .product-grid { margin: 0; gap: 12px; }
 .category-block .product-card { background: #ffffff; border: none; border-radius: 12px; padding: 0; display: flex; flex-direction: column; overflow: hidden; }
 .category-block .product-card .ingredient-img { margin: 0; border-radius: 0; aspect-ratio: 3 / 2; flex-shrink: 0; }
+/* All text rows get horizontal padding */
+.category-block .product-card .product-tag,
 .category-block .product-card .product-name,
 .category-block .product-card .product-desc { padding-left: 22px; padding-right: 22px; }
-.category-block .product-card .product-name { padding-top: 20px; }
+/* Top padding: first text element (product-tag if exists, else product-name) */
+.category-block .product-card .product-tag { padding-top: 20px; margin-bottom: 6px; }
+.category-block .product-card .ingredient-img + .product-name,
+.category-block .product-card > .product-name:first-child { padding-top: 20px; }
+.category-block .product-card .product-tag + .product-name { padding-top: 0; }
 .category-block .product-card .product-desc { padding-bottom: 22px; }
 .category-block.mushroom .product-tag.launched { color: var(--mushroom-accent); }
 .category-block.herb .product-tag.launched { color: var(--herb-accent); }
