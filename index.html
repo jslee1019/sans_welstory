@@ -1120,5 +1120,90 @@ document.querySelectorAll('.table-scroll').forEach(function(wrap) {
   onScroll();
 })();
 </script>
+
+<!-- ============================================================
+     SANS 발표 동기화 (Presenter Sync)
+     - 발표자가 스크롤하면 사용자(관전자) 화면이 같은 위치로 따라감
+     - 우상단 "발표자" 버튼에서 비밀번호 입력 시 발표자로 전환
+     - 비밀번호 변경: 아래 PRESENTER_PASSWORD 한 줄만 수정
+     ============================================================ -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+  #sync-bar{position:fixed;top:14px;right:14px;z-index:2147483647;display:flex;gap:8px;
+    align-items:center;font:600 12.5px/1 -apple-system,system-ui,'Segoe UI',sans-serif}
+  #sync-bar .pill{border-radius:999px;padding:8px 14px;background:#c0ffee;color:#0a0a0a;
+    box-shadow:0 4px 16px rgba(0,0,0,.18)}
+  #sync-bar .pill.live{background:#ff3b30;color:#fff}
+  #sync-bar button{border:0;border-radius:999px;padding:8px 14px;cursor:pointer;
+    background:#0a0a0a;color:#c0ffee;box-shadow:0 4px 16px rgba(0,0,0,.18);
+    font:inherit;transition:transform .1s}
+  #sync-bar button:active{transform:scale(.95)}
+</style>
+<div id="sync-bar"></div>
+<script>
+(function(){
+  var firebaseConfig = {
+    apiKey:            "AIzaSyDfPbyZLRcGwnG2zA9r_XY3xfjWBP0YU58",
+    authDomain:        "sans-twelve.firebaseapp.com",
+    databaseURL:       "https://sans-twelve-default-rtdb.firebaseio.com",
+    projectId:         "sans-twelve",
+    storageBucket:     "sans-twelve.firebasestorage.app",
+    messagingSenderId: "337120932890",
+    appId:             "1:337120932890:web:ca778067575970b2c0cda3"
+  };
+  var PRESENTER_PASSWORD = "sans2026";   // <- 원하는 비밀번호로 변경
+
+  var bar = document.getElementById('sync-bar');
+  if (typeof firebase === 'undefined') { bar.innerHTML = '<span class="pill">설정 필요</span>'; return; }
+
+  firebase.initializeApp(firebaseConfig);
+  var ref = firebase.database().ref('presenter/scroll');
+
+  var isPresenter = false, following = true, targetPct = null;
+
+  function render(){
+    if (isPresenter){ bar.innerHTML = '<span class="pill live">발표 중</span>'; return; }
+    bar.innerHTML =
+      '<span class="pill">' + (following ? '발표 따라가는 중' : '멈춤') + '</span>' +
+      '<button id="sync-follow">' + (following ? '멈춤' : '따라가기') + '</button>' +
+      '<button id="sync-login">발표자</button>';
+    document.getElementById('sync-follow').onclick = function(){ following = !following; render(); };
+    document.getElementById('sync-login').onclick = function(){
+      var pw = prompt('발표자 비밀번호를 입력하세요');
+      if (pw === PRESENTER_PASSWORD) becomePresenter();
+      else if (pw !== null) alert('비밀번호가 올바르지 않습니다.');
+    };
+  }
+  function becomePresenter(){
+    isPresenter = true; render();
+    var last = 0;
+    window.addEventListener('scroll', function(){
+      var now = Date.now();
+      if (now - last < 70) return;
+      last = now;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      ref.set({ pct: max > 0 ? window.scrollY / max : 0, t: now });
+    }, { passive: true });
+  }
+  ref.on('value', function(snap){
+    var d = snap.val();
+    if (!d || isPresenter) return;
+    targetPct = d.pct;
+  });
+  (function loop(){
+    if (!isPresenter && following && targetPct != null){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - window.innerHeight;
+      var cur = window.scrollY || doc.scrollTop;
+      var target = targetPct * max;
+      if (Math.abs(target - cur) > 1) doc.scrollTop = cur + (target - cur) * 0.2;
+    }
+    requestAnimationFrame(loop);
+  })();
+  render();
+})();
+</script>
+
 </body>
 </html>
