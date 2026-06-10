@@ -1122,21 +1122,21 @@ document.querySelectorAll('.table-scroll').forEach(function(wrap) {
 </script>
 
 <!-- ============================================================
-     SANS 발표 동기화 (Presenter Sync)
-     - 발표자가 스크롤하면 사용자(관전자) 화면이 같은 위치로 따라감
+     SANS 발표 동기화 (Presenter Sync) — 즉시 미러링 버전
+     - 발표자 스크롤을 관전자가 그대로(속도·위치 동일) 따라감
      - 우상단 "발표자" 버튼에서 비밀번호 입력 시 발표자로 전환
      - 비밀번호 변경: 아래 PRESENTER_PASSWORD 한 줄만 수정
      ============================================================ -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <style>
-  #sync-bar{position:fixed;top:14px;right:14px;z-index:2147483647;display:flex;gap:8px;
-    align-items:center;font:600 12.5px/1 -apple-system,system-ui,'Segoe UI',sans-serif}
-  #sync-bar .pill{border-radius:999px;padding:8px 14px;background:#c0ffee;color:#0a0a0a;
-    box-shadow:0 4px 16px rgba(0,0,0,.18)}
+  #sync-bar{position:fixed;bottom:14px;left:14px;z-index:2147483647;display:flex;gap:6px;
+    align-items:center;font:600 11px/1 -apple-system,system-ui,'Segoe UI',sans-serif}
+  #sync-bar .pill{border-radius:999px;padding:5px 10px;background:#c0ffee;color:#0a0a0a;
+    box-shadow:0 3px 12px rgba(0,0,0,.16)}
   #sync-bar .pill.live{background:#ff3b30;color:#fff}
-  #sync-bar button{border:0;border-radius:999px;padding:8px 14px;cursor:pointer;
-    background:#0a0a0a;color:#c0ffee;box-shadow:0 4px 16px rgba(0,0,0,.18);
+  #sync-bar button{border:0;border-radius:999px;padding:5px 10px;cursor:pointer;
+    background:#0a0a0a;color:#c0ffee;box-shadow:0 3px 12px rgba(0,0,0,.16);
     font:inherit;transition:transform .1s}
   #sync-bar button:active{transform:scale(.95)}
 </style>
@@ -1175,32 +1175,42 @@ document.querySelectorAll('.table-scroll').forEach(function(wrap) {
       else if (pw !== null) alert('비밀번호가 올바르지 않습니다.');
     };
   }
+
+  // 발표자: 스크롤할 때마다 프레임 단위로 현재 위치(%) 전송
   function becomePresenter(){
     isPresenter = true; render();
-    var last = 0;
-    window.addEventListener('scroll', function(){
-      var now = Date.now();
-      if (now - last < 70) return;
-      last = now;
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      ref.set({ pct: max > 0 ? window.scrollY / max : 0, t: now });
-    }, { passive: true });
+    var dirty = false, lastSent = -1;
+    window.addEventListener('scroll', function(){ dirty = true; }, { passive: true });
+    (function push(){
+      if (isPresenter && dirty){
+        dirty = false;
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? window.scrollY / max : 0;
+        if (pct !== lastSent){ lastSent = pct; ref.set({ pct: pct, t: Date.now() }); }
+      }
+      requestAnimationFrame(push);
+    })();
   }
+
+  // 관전자: 최신 위치 수신
   ref.on('value', function(snap){
     var d = snap.val();
     if (!d || isPresenter) return;
     targetPct = d.pct;
   });
-  (function loop(){
-    if (!isPresenter && following && targetPct != null){
+
+  // 관전자: 발표자 위치가 바뀔 때마다 즉시 동일 위치로 이동 (보간 없음)
+  var appliedPct = null;
+  (function follow(){
+    if (!isPresenter && following && targetPct != null && targetPct !== appliedPct){
+      appliedPct = targetPct;
       var doc = document.documentElement;
       var max = doc.scrollHeight - window.innerHeight;
-      var cur = window.scrollY || doc.scrollTop;
-      var target = targetPct * max;
-      if (Math.abs(target - cur) > 1) doc.scrollTop = cur + (target - cur) * 0.2;
+      doc.scrollTop = targetPct * max;
     }
-    requestAnimationFrame(loop);
+    requestAnimationFrame(follow);
   })();
+
   render();
 })();
 </script>
