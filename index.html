@@ -145,6 +145,12 @@ hr.rule-heavy { border: none; border-top: 1px solid var(--ink); margin: 36px 0; 
 .category-block .product-card > .product-name:first-child { padding-top: 20px; }
 .category-block .product-card .product-tag + .product-name { padding-top: 0; }
 .category-block .product-card .product-desc { padding-bottom: 22px; }
+.category-block .product-card.wide { flex-direction: row; align-items: stretch; margin-top: 12px; }
+.category-block .product-card.wide .ingredient-img { width: 38%; flex-shrink: 0; aspect-ratio: auto; min-height: 150px; border-radius: 0; }
+.category-block .product-card.wide .wide-text { display: flex; flex-direction: column; justify-content: center; padding: 22px 28px; }
+.category-block .product-card.wide .product-name { padding: 0 0 8px; }
+.category-block .product-card.wide .product-desc { padding: 0; }
+@media (max-width: 640px) { .category-block .product-card.wide { flex-direction: column; } .category-block .product-card.wide .ingredient-img { width: 100%; aspect-ratio: 3 / 2; min-height: 0; } .category-block .product-card.wide .wide-text { padding: 18px 22px 22px; } }
 .category-block.mushroom .product-tag.launched { color: var(--mushroom-accent); }
 .category-block.herb .product-tag.launched { color: var(--herb-accent); }
 .category-block.functional .product-tag.launched { color: var(--functional-accent); }
@@ -339,8 +345,8 @@ footer { padding: 56px 0; background: var(--ink); }
 <section id="cover">
   <div class="wrap">
     <p class="cover-eyebrow fade fade-1">Partnership Proposal · 2026</p>
-    <h1 class="display fade fade-2">버섯커피 시장의<br><em>유일한 해답</em></h1>
-    <p class="cover-sub fade fade-3">글로벌 Functional Coffee 시장 분석과 SANS 도입 제안 —<br>삼성웰스토리 사내카페 메뉴 입점 검토용</p>
+    <h1 class="display fade fade-2">삼성웰스토리<br><em>SANS 도입 제안</em></h1>
+    <p class="cover-sub fade fade-3">글로벌 Functional Coffee 시장 분석과 SANS 도입 제안 —<br>삼성웰스토리 사내카페 메뉴 입점 · 시음 테스트 검토용</p>
     <div class="kpi-strip fade fade-4">
       <div class="kpi"><div class="kpi-value">$3.23B</div><div class="kpi-label">글로벌 버섯커피 시장<br>2025년 기준</div></div>
       <div class="kpi"><div class="kpi-value">$300M+</div><div class="kpi-label">RYZE 2025년 연매출 추산<br>약 4,350억 원 (Forbes)</div></div>
@@ -357,8 +363,8 @@ footer { padding: 56px 0; background: var(--ink); }
     <h2>세 문장으로 요약</h2>
     <div class="verdict-row">
       <div class="verdict">
-        <p class="verdict-title opp">시장 기회</p>
-        <p>버섯커피는 미국에서 이미 연간 수천억 원 규모를 형성했으며, RYZE 한 브랜드만으로 2025년 연간 약 $300M(약 4,350억 원)에 달합니다(Forbes, 2026.01). 파우더 세그먼트 중심의 D2C 모델로 빠르게 성장하고 있습니다.</p>
+        <p class="verdict-title opp">소비자 트렌드</p>
+        <p>버섯커피는 미국에서 이미 연간 수천억 원 규모를 형성했으며, '기존 커피보다 내 몸에 더 건강한 커피'라는 인식을 바탕으로 소비자 인지도에서도 J커브를 그리며 매우 가파르게 성장하고 있습니다.</p>
       </div>
       <div class="verdict">
         <p class="verdict-title lim">기존 브랜드의 한계</p>
@@ -580,7 +586,7 @@ footer { padding: 56px 0; background: var(--ink); }
     <div class="category-block mushroom">
       <p class="cat-label">Mushroom · 버섯 원료</p>
       <p class="cat-title">검증된 약용 버섯</p>
-      <p class="cat-intro">노루궁뎅이·차가·동충하초·영지·백목이 등 동서양에서 오랫동안 연구·활용되어 온 버섯들. 발효 공정으로 흙냄새가 제거되어 커피와 자연스럽게 결합됩니다.</p>
+      <p class="cat-intro">노루궁뎅이·차가·동충하초·영지·홍삼 등 동서양에서 오랫동안 연구·활용되어 온 버섯들. 발효 공정으로 흙냄새가 제거되어 커피와 자연스럽게 결합됩니다.</p>
       <div class="product-grid">
       <div class="product-card">
         <div class="ingredient-img"><img src="assets/ingredients/lions-mane.jpg" alt="노루궁뎅이버섯" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>노루궁뎅이버섯</span>'"></div>
@@ -602,23 +608,20 @@ footer { padding: 56px 0; background: var(--ink); }
         <p class="product-name">영지버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Reishi</span></p>
         <p class="product-desc">예로부터 '불로초'라 불려온 약용 버섯. 트리테르페노이드·베타글루칸을 함유하며, 스트레스 완화와 수면의 질, 면역 균형에 도움을 줄 수 있는 원료로 알려져 있습니다. 저녁 시간대 음용 포뮬러에 적합합니다.</p>
       </div>
-      <div class="product-card">
-        <div class="ingredient-img"><img src="assets/ingredients/tremella.jpg" alt="백목이버섯" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>백목이버섯</span>'"></div>
-        <p class="product-name">백목이버섯 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Tremella · Snow Mushroom</span></p>
-        <p class="product-desc">'은이버섯'으로도 불리는 약용 버섯. 천연 다당체와 보습 성분이 풍부해 피부 수분과 탄력에 도움을 줄 수 있는 원료로 알려져 있으며, 해외에서는 'Beauty Mushroom'으로 뷰티·스킨 케어 라인에 활용됩니다.</p>
       </div>
-      <div class="product-card">
+      <div class="product-card wide">
         <div class="ingredient-img"><img src="assets/ingredients/red-ginseng.jpg" alt="홍삼" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>홍삼</span>'"></div>
-        <p class="product-name">홍삼 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Korean Red Ginseng</span></p>
-        <p class="product-desc">6년근 인삼을 증숙·건조한 한국 대표 원료. 진세노사이드 Rg1·Rb1·Rg3 등 고유 사포닌을 함유하며, 면역력 증진과 피로 회복, 기억력 개선, 항산화에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
-      </div>
+        <div class="wide-text">
+          <p class="product-name">홍삼 <span style="font-size:12px;color:var(--ink-light);font-weight:400;">Korean Red Ginseng</span></p>
+          <p class="product-desc">6년근 인삼을 증숙·건조한 한국 대표 원료. 진세노사이드 Rg1·Rb1·Rg3 등 고유 사포닌을 함유하며, 면역력 증진과 피로 회복, 기억력 개선, 항산화에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+        </div>
       </div>
     </div>
 
     <div class="category-block herb">
       <p class="cat-label">Botanical · 보태니컬 원료</p>
       <p class="cat-title">향과 기능을 함께 더하는 식물 원료</p>
-      <p class="cat-intro">라벤더·자스민·메리골드 같은 꽃 허브부터 대추·타트체리·세븐베리·암라 같은 베리·열매 원료까지. 포뮬러에 풍미의 깊이와 시각적 정체성을 부여합니다.</p>
+      <p class="cat-intro">라벤더·자스민·메리골드·히비스커스 같은 꽃 허브부터 대추·타트체리·블랙베리·아로니아 등 다양한 베리·열매 원료까지. 포뮬러에 풍미의 깊이와 시각적 정체성을 부여합니다.</p>
       <div class="product-grid cols-3">
       <div class="product-card compact">
         <div class="ingredient-img"><img src="assets/ingredients/lavender.jpg" alt="라벤더" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>라벤더</span>'"></div>
@@ -651,14 +654,59 @@ footer { padding: 56px 0; background: var(--ink); }
         <p class="product-desc">루테인·제아잔틴을 함유한 꽃잎 추출물. 눈 건강과 항산화에 도움을 줄 수 있는 원료로 알려져 있으며, 라인업의 자연스러운 옐로 톤도 더해줍니다.</p>
       </div>
       <div class="product-card compact">
-        <div class="ingredient-img"><img src="assets/ingredients/seven-berries.jpg" alt="세븐베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>세븐베리</span>'"></div>
-        <p class="product-name">세븐베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Seven Berries</span></p>
-        <p class="product-desc">아로니아·블루베리·블랙커런트 등 7종 베리 농축물. 안토시아닌·폴리페놀이 풍부해 항산화와 눈 건강에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+        <div class="ingredient-img"><img src="assets/ingredients/blackberry.jpg" alt="블랙베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>블랙베리</span>'"></div>
+        <p class="product-name">블랙베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Blackberry</span></p>
+        <p class="product-desc">안토시아닌·엘라그산이 풍부한 검은 베리. 항산화와 세포 건강에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/strawberry.jpg" alt="딸기" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>딸기</span>'"></div>
+        <p class="product-name">딸기 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Strawberry</span></p>
+        <p class="product-desc">비타민C와 폴리페놀이 풍부한 대표 베리. 항산화와 상큼한 향미를 더하는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/dark-sweet-cherry.jpg" alt="다크스위트체리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>다크스위트체리</span>'"></div>
+        <p class="product-name">다크스위트체리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Dark Sweet Cherry</span></p>
+        <p class="product-desc">진한 안토시아닌을 함유한 스위트 체리. 항산화와 회복에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/aronia.jpg" alt="아로니아" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>아로니아</span>'"></div>
+        <p class="product-name">아로니아 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Aronia</span></p>
+        <p class="product-desc">안토시아닌이 매우 풍부한 다크 베리. 항산화와 혈관·눈 건강에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/bilberry.jpg" alt="빌베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>빌베리</span>'"></div>
+        <p class="product-name">빌베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Bilberry</span></p>
+        <p class="product-desc">유럽산 야생 블루베리. 안토시아닌 함량이 매우 높아 눈 건강과 항산화에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/cranberry.jpg" alt="크랜베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>크랜베리</span>'"></div>
+        <p class="product-name">크랜베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Cranberry</span></p>
+        <p class="product-desc">프로안토시아니딘이 풍부한 베리. 요로·방광 건강과 항산화에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/raspberry.jpg" alt="라즈베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>라즈베리</span>'"></div>
+        <p class="product-name">라즈베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Raspberry</span></p>
+        <p class="product-desc">폴리페놀과 라즈베리 케톤을 함유한 베리. 항산화와 대사 보조에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
       </div>
       <div class="product-card compact">
         <div class="ingredient-img"><img src="assets/ingredients/amla.jpg" alt="인디언 구스베리" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>인디언 구스베리</span>'"></div>
         <p class="product-name">인디언 구스베리 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Amla</span></p>
         <p class="product-desc">아유르베다 전통 슈퍼푸드 '암라'. 비타민C 함량이 매우 높고, 항산화와 면역에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/hibiscus.jpg" alt="히비스커스" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>히비스커스</span>'"></div>
+        <p class="product-name">히비스커스 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Hibiscus</span></p>
+        <p class="product-desc">붉은 꽃받침을 우린 원료. 상큼한 산미와 안토시아닌으로 항산화에 도움을 줄 수 있는 원료로 알려져 있으며, 라인업에 선명한 루비 톤을 더합니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/guarana.jpg" alt="과라나" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>과라나</span>'"></div>
+        <p class="product-name">과라나 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Guarana</span></p>
+        <p class="product-desc">아마존 자생 종자 추출물. 천천히 흡수되는 천연 카페인으로 지속적인 활력과 각성에 도움을 줄 수 있는 원료로 알려져 있습니다.</p>
+      </div>
+      <div class="product-card compact">
+        <div class="ingredient-img"><img src="assets/ingredients/grapefruit.jpg" alt="자몽" onerror="this.style.display='none';this.parentNode.innerHTML='<span class=&quot;placeholder&quot;>자몽</span>'"></div>
+        <p class="product-name">자몽 <span style="font-size:11px;color:var(--ink-light);font-weight:400;">Grapefruit</span></p>
+        <p class="product-desc">시트러스 대표 과일. 나린진 등 플라보노이드가 풍부해 항산화와 상큼한 향미를 더하는 원료로 알려져 있습니다.</p>
       </div>
       </div>
     </div>
@@ -730,7 +778,7 @@ footer { padding: 56px 0; background: var(--ink); }
       </div>
       </div>
     </div>
-    <div class="section-label"><span class="ko">제품 라인업</span><span class="en">Product Lineup</span></div>
+    <div class="section-label"><span class="ko">기능성 소구</span><span class="en">Functional Appeal</span></div>
     <div class="product-grid">
       <div class="product-card">
         <p class="product-tag launched">개발 완료</p>
@@ -739,26 +787,26 @@ footer { padding: 56px 0; background: var(--ink); }
       </div>
       <div class="product-card">
         <p class="product-tag launched">개발 완료</p>
-        <p class="product-name split">Balance &amp; Restore<span class="keyword">이완·회복·수면</span></p>
+        <p class="product-name split">Recovery &amp; Balance<span class="keyword">이완·회복·수면</span></p>
         <p class="product-desc">균형·회복 포뮬러. 레몬밤, 영지버섯, 타트체리, 대추, 라벤더 함유. 카페인 Zero. 이완과 편안한 수면에 도움을 줄 수 있는 원료로 알려진 성분 중심. 오후·저녁 음용 최적화.</p>
       </div>
       <div class="product-card">
-        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-tag launched">개발 완료</p>
         <p class="product-name split">Skin &amp; Glow<span class="keyword">탄력·광채·뷰티</span></p>
         <p class="product-desc">피부 광채 포뮬러. 콜라겐, 글루타치온, 비타민C 고함량. 피부 탄력과 광채에 도움을 줄 수 있는 원료로 알려진 성분 중심. 뷰티 웰니스 소비층 타겟.</p>
       </div>
       <div class="product-card">
-        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-tag launched">개발 완료</p>
         <p class="product-name split">Calm &amp; Sleep<span class="keyword">진정·숙면</span></p>
         <p class="product-desc">수면 지원 포뮬러. 아답토젠 블렌드, 멜라토닌, L-테아닌, 마그네슘 함유. 스트레스 완화와 수면의 질 개선에 도움을 줄 수 있는 원료로 알려진 성분 중심 설계.</p>
       </div>
       <div class="product-card">
-        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-tag launched">개발 완료</p>
         <p class="product-name split">Change &amp; Longevity<span class="keyword">항노화·활력</span></p>
         <p class="product-desc">항노화 포뮬러. NR(니코틴아마이드 리보사이드), 레스베라트롤 등 고기능성 성분 투여. 세포 수준의 활력 지원에 도움을 줄 수 있는 원료 중심.</p>
       </div>
       <div class="product-card">
-        <p class="product-tag upcoming">추후 예정</p>
+        <p class="product-tag launched">개발 완료</p>
         <p class="product-name split">Gut &amp; Immune<span class="keyword">장 건강·면역</span></p>
         <p class="product-desc">장·면역 포뮬러. 프리바이오틱스, 베타글루칸, 차가버섯 고함량. 장 건강과 면역 기능 유지에 도움을 줄 수 있는 원료로 알려진 성분 중심. 소화 민감층 최적화.</p>
       </div>
@@ -776,30 +824,40 @@ footer { padding: 56px 0; background: var(--ink); }
     <div class="callout" style="margin-bottom:28px;">
       <p>삼성웰스토리 사내카페의 핵심 고객은 <strong>기업 임직원</strong>입니다. 장시간 근무 속에서 <strong>집중·피로 회복·스트레스 완화·건강 관리</strong>가 핵심 니즈로 확인되며, 저당·고단백·비건 등 건강식 수요가 사내카페까지 확산되고 있습니다. 이들에게 커피는 단순 기호식품을 넘어 <strong>'하루의 컨디션을 관리하는 루틴'</strong>입니다.</p>
     </div>
+    <div class="cols-2" style="margin-bottom:28px;">
+      <div class="func-note" style="margin:0;">
+        <p class="func-note-title" style="color:var(--positive);">Focus &amp; Energy</p>
+        <p>기존 커피의 카페인보다 훨씬 더 건강한 각성 효과. <strong>Clean Energy, No caffeine crash</strong> — 원두·카페인 없이 맑은 집중과 지속되는 에너지를 제공합니다.</p>
+      </div>
+      <div class="func-note" style="margin:0;">
+        <p class="func-note-title" style="color:var(--positive);">Recovery &amp; Balance</p>
+        <p>카페인 없이 오후의 컨디션을 유지하고 긴장을 완화시켜 주는 부드러운 회복 효과. <strong>Calm Recovery, Caffeine-free</strong> — 이완과 밸런스로 하루 후반의 컨디션을 지원합니다.</p>
+      </div>
+    </div>
     <div class="table-scroll"><table class="data-table">
       <thead>
-        <tr><th>임직원 유형</th><th>핵심 니즈</th><th>적용 가능 성분 (일반 기능성 원료)</th></tr>
+        <tr><th>임직원 유형</th><th>핵심 니즈</th><th>매칭 라인업</th></tr>
       </thead>
       <tbody>
         <tr>
           <td class="em">오전 집중이 필요한 직장인</td>
           <td>카페인 없이 맑은 집중</td>
-          <td>L-테아닌, 노루궁뎅이버섯, 과라나(저카페인)</td>
+          <td><strong>Focus &amp; Energy</strong></td>
         </tr>
         <tr>
           <td class="em">오후 피로·번아웃 케어</td>
           <td>에너지 회복·활력</td>
-          <td>홍삼, 동충하초, MCT, 비타민B군</td>
+          <td><strong>Recovery &amp; Balance</strong></td>
         </tr>
         <tr>
           <td class="em">스트레스·수면 관리층</td>
           <td>긴장 완화·컨디션 유지</td>
-          <td>레몬밤, 영지버섯, 마그네슘, L-테아닌</td>
+          <td><strong>Recovery &amp; Balance</strong></td>
         </tr>
         <tr>
           <td class="em">건강·다이어트 관심 임직원</td>
           <td>저당·장 건강·면역</td>
-          <td>식이섬유, 아연, 차가버섯 (설탕 Zero)</td>
+          <td><strong>Focus &amp; Energy</strong></td>
         </tr>
       </tbody>
     </table></div>
